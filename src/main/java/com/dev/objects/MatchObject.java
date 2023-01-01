@@ -30,13 +30,6 @@ public class MatchObject {
     @Column(name = "running")
     private boolean running;
 
-//    @ManyToOne
-//    @JoinColumn(name = "team1")
-//    private TeamObject teamObject;
-//    @ManyToOne
-//    @JoinColumn(name = "team2")
-//    private TeamObject teamObject1;
-
 
     public MatchObject(TeamObject team1, TeamObject team2, int team1_goals, int team2_goals, boolean running,UserObject userThatUpdate) {
 

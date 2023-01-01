@@ -72,25 +72,6 @@ public class Utils {
         return tableLeague;
     }
 
-//    public List<MatchObject> allEndMatch(List<MatchObject> allMatch) {
-//        List<MatchObject> liveMatch = new ArrayList<>();
-//        for (MatchObject matchObject : allMatch) {
-//            if (!matchObject.isRunning()) {
-//                liveMatch.add(matchObject);
-//            }
-//        }
-//        return liveMatch;
-//    }
-//
-//    public List<MatchObject> allLiveMatch(List<MatchObject> allMatch) {
-//        List<MatchObject> liveMatch = new ArrayList<>();
-//        for (MatchObject matchObject : allMatch) {
-//            if (matchObject.isRunning()) {
-//                liveMatch.add(matchObject);
-//            }
-//        }
-//        return liveMatch;
-//    }
 
     public boolean checkIfMatchIsRunning(MatchObject matchObject) {
         if (matchObject.isRunning()) {
@@ -185,30 +166,3 @@ public class Utils {
 
 
 }
-//   public boolean validateUsername(String username) {
-//        boolean valid = false;
-//        if (username != null) {
-//            if (username.contains("@")) {
-//                valid = true;
-//            }
-//        }
-//        return valid;
-//    }
-//
-//    public boolean validatePassword(String password) {
-//        boolean valid = false;
-//        if (password != null) {
-//            if (password.length() >= 8) {
-//                valid = true;
-//            }
-//        }
-//        return valid;
-//    }
-//
-//    public boolean validateNote (String note) {
-//        boolean valid = false;
-//        if (note != null && note.length() > 0) {
-//            valid = true;
-//        }
-//        return valid;
-//    }
