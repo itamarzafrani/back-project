@@ -30,7 +30,7 @@ public class TestController {
     private final int USERNAME_DIDNT_VALIDATE = 5;
     private final int PASSWORD_DIDNT_VALIDATE = 6;
 
-    private final int USERNAME_ALREADY_TAKEN = 6;
+    private final int USERNAME_ALREADY_TAKEN = 7;
 
 
     private final int PASSWORD_OR_USERNAME_INCORRECT = 2;
