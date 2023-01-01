@@ -13,8 +13,7 @@ public class UserResponse extends BasicResponse {
         this.user = user;
     }
 
-    public UserResponse(UserObject user) {
-        this.user = user;
+    public UserResponse() {
     }
 
     public UserObject getUser() {

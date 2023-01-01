@@ -26,6 +26,13 @@ public class TestController {
 
     //BASIC-RESPONSE
     private final int USERNAME_DIDNT_FOUND = 1;
+
+    private final int USERNAME_DIDNT_VALIDATE = 5;
+    private final int PASSWORD_DIDNT_VALIDATE = 6;
+
+    private final int USERNAME_ALREADY_TAKEN = 6;
+
+
     private final int PASSWORD_OR_USERNAME_INCORRECT = 2;
 
     private final int DIDNT_FOUNT_BY_USER_ID = 1;
@@ -63,7 +70,7 @@ public class TestController {
 
         for (int j = 0; j < allTeams.size(); j++) {
             for (int i = 0; i < liveMatches.size(); i++) {
-                if (liveMatches.get(i).getTeam1().getName().equals( allTeams.get(j).getName()) || liveMatches.get(i).getTeam2().getName().equals(allTeams.get(j).getName())) {
+                if (liveMatches.get(i).getTeam1().getName().equals(allTeams.get(j).getName()) || liveMatches.get(i).getTeam2().getName().equals(allTeams.get(j).getName())) {
                     break;
                 }
                 if (i == liveMatches.size() - 1) {
@@ -71,7 +78,7 @@ public class TestController {
                 }
             }
         }
-            return teams;
+        return teams;
 
     }
 
@@ -156,17 +163,26 @@ public class TestController {
     @RequestMapping //CREAT-ACCOUNT
             (value = "/create-account", method = {RequestMethod.POST})
     public UserResponse addUser(String username, String password) {
-        UserResponse userResponse;
+        UserResponse userResponse = new UserResponse();
         UserObject newUser = null;
         if (utils.validateUserName(username)) {
             if (utils.validatePassword(password)) {
                 if (persist.usernameAvailable(username)) {
                     String token = utils.createHash(username, password);
                     newUser = persist.addUser(username, token);
+                }else {
+                    userResponse = new UserResponse(false, USERNAME_ALREADY_TAKEN, null);
+                return userResponse;
                 }
+            }else {
+                userResponse = new UserResponse(false, PASSWORD_DIDNT_VALIDATE, null);
+            return userResponse;
             }
+        } else {
+            userResponse = new UserResponse(false, USERNAME_DIDNT_VALIDATE,null );
+            return userResponse;
         }
-        userResponse = new UserResponse(true, null, newUser);
+        userResponse = new UserResponse(true, null,newUser );
         return userResponse;
     }
 
