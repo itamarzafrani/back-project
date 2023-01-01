@@ -19,7 +19,8 @@ import java.util.List;
 public class Persist {
 
     private Connection connection;
-
+    @Autowired
+    private Utils utils;
     final List<String> teams = Arrays.asList("Barcelona", "Real Madrid", "Bayren", "Benfica",
             "Chelsea", "Inter", "Liverpool", "Milan", "Paris", "Tottenham", "Dortmund", "Napoli");
 
@@ -39,9 +40,21 @@ public class Persist {
             System.out.println("Successfully connected to DB");
             System.out.println();
             checkIfTableLeagueIsEmpty();
+            if (getUsers().isEmpty()) {
+                String token = utils.createHash("Shai123", "Shai123!");
+                addUser("Shai123", token);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<UserObject> getUsers() {
+        Session session = sessionFactory.openSession();
+
+        List<UserObject> allUsers = session.createQuery("FROM UserObject ").list();
+        session.close();
+        return allUsers;
     }
 
 
@@ -92,9 +105,9 @@ public class Persist {
     }
 
 
-    public MatchObject addMatch(TeamObject team1, TeamObject team2,UserObject userIdThatUpdate) {
+    public MatchObject addMatch(TeamObject team1, TeamObject team2, UserObject userIdThatUpdate) {
         Session session = sessionFactory.openSession();
-        MatchObject matchObject = new MatchObject(team1, team2, 0, 0, true,userIdThatUpdate);
+        MatchObject matchObject = new MatchObject(team1, team2, 0, 0, true, userIdThatUpdate);
         session.save(matchObject);
         session.close();
         return matchObject;
@@ -173,10 +186,10 @@ public class Persist {
         return response;
     }
 
-    public UserObject getUserByUserId(int userId){
+    public UserObject getUserByUserId(int userId) {
         UserObject foundUser = null;
         Session session = sessionFactory.openSession();
-         foundUser = (UserObject) session.createQuery("FROM UserObject where id =:userId").
+        foundUser = (UserObject) session.createQuery("FROM UserObject where id =:userId").
                 setParameter("userId", userId).uniqueResult();
         session.close();
         return foundUser;
