@@ -32,7 +32,6 @@ public class TestController {
 
     private final int USERNAME_ALREADY_TAKEN = 7;
 
-
     private final int PASSWORD_OR_USERNAME_INCORRECT = 2;
 
     private final int DIDNT_FOUNT_BY_USER_ID = 1;
